@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+
+<AnchorPane prefHeight="1155.0" prefWidth="1546.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coy.Map1Controller">
+   <children>
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" layoutX="14.0" pannable="true" prefHeight="1163.0" prefWidth="1546.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+            <Pane prefHeight="1158.0" prefWidth="1555.0">
+               <children>
+                  <ImageView fx:id="map" fitHeight="1163.0" fitWidth="1546.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/map1.jpg" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall1" fitHeight="75.0" fitWidth="94.0" layoutX="13.0" layoutY="-79.0" pickOnBounds="true" preserveRatio="true" x="716.0" y="510.0">
+                     <image>
+                        <Image url="@../../../pics/wall.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall2" fitHeight="100.0" fitWidth="100.0" layoutX="-129.0" layoutY="-82.0" pickOnBounds="true" preserveRatio="true" x="787.0" y="510.0">
+                     <image>
+                        <Image url="@../../../pics/wall2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="mine1" fitHeight="80.0" fitWidth="86.0" layoutX="700.0" layoutY="391.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/gold_mine_4.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="camp1" fitHeight="121.0" fitWidth="117.0" layoutX="808.0" layoutY="373.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/army_camp_10.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="exircollector1" fitHeight="75.0" fitWidth="112.0" layoutX="971.0" layoutY="395.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/elixir_collector_5.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall3" fitHeight="100.0" fitWidth="100.0" layoutX="-64.0" layoutY="-32.0" pickOnBounds="true" preserveRatio="true" x="787.0" y="510.0">
+                     <image>
+                        <Image url="@../../../pics/wall2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall4" fitHeight="80.0" fitWidth="96.0" layoutX="-2.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" x="787.0" y="510.0">
+                     <image>
+                        <Image url="@../../../pics/wall2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall5" fitHeight="67.0" fitWidth="81.0" layoutX="19.0" layoutY="-70.0" pickOnBounds="true" preserveRatio="true" x="787.0" y="510.0">
+                     <image>
+                        <Image url="@../../../pics/wall2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall6" fitHeight="78.0" fitWidth="86.0" layoutX="144.0" layoutY="-80.0" pickOnBounds="true" preserveRatio="true" x="716.0" y="510.0">
+                     <image>
+                        <Image url="@../../../pics/wall.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="clanCastle" fitHeight="89.0" fitWidth="81.0" layoutX="767.0" layoutY="440.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/Clan_Castle3.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall7" fitHeight="72.0" fitWidth="82.0" layoutX="140.0" layoutY="-78.0" pickOnBounds="true" preserveRatio="true" x="787.0" y="510.0">
+                     <image>
+                        <Image url="@../../../pics/wall2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="goldStorage1" fitHeight="93.0" fitWidth="87.0" layoutX="823.0" layoutY="482.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/gold_storage_11.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="archerTower1" fitHeight="104.0" fitWidth="83.0" layoutX="887.0" layoutY="429.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/Archer_Tower6B.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall8" fitHeight="80.0" fitWidth="94.0" layoutX="207.0" layoutY="-34.0" pickOnBounds="true" preserveRatio="true" x="716.0" y="510.0">
+                     <image>
+                        <Image url="@../../../pics/wall.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall9" fitHeight="82.0" fitWidth="96.0" layoutX="137.0" layoutY="15.0" pickOnBounds="true" preserveRatio="true" x="716.0" y="510.0">
+                     <image>
+                        <Image url="@../../../pics/wall.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall10" fitHeight="80.0" fitWidth="94.0" layoutX="-129.0" layoutY="-81.0" pickOnBounds="true" preserveRatio="true" x="716.0" y="510.0">
+                     <image>
+                        <Image url="@../../../pics/wall.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="cannon1" fitHeight="68.0" fitWidth="68.0" layoutX="632.0" layoutY="466.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/cannon_11.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="exirStorage1" fitHeight="68.0" fitWidth="69.0" layoutX="674.0" layoutY="495.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/elixir_storage_9.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall11" fitHeight="68.0" fitWidth="81.0" layoutX="-200.0" layoutY="-28.0" pickOnBounds="true" preserveRatio="true" x="787.0" y="510.0">
+                     <image>
+                        <Image url="@../../../pics/wall2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall12" fitHeight="78.0" fitWidth="89.0" layoutX="-141.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" x="716.0" y="510.0">
+                     <image>
+                        <Image url="@../../../pics/wall.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="exircollector2" fitHeight="75.0" fitWidth="112.0" layoutX="531.0" layoutY="713.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/elixir_collector_5.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="camp2" fitHeight="121.0" fitWidth="117.0" layoutX="499.0" layoutY="495.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/army_camp_10.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="archerTower2" fitHeight="104.0" fitWidth="83.0" layoutX="617.0" layoutY="514.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/Archer_Tower6B.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall13" fitHeight="81.0" fitWidth="93.0" layoutX="-219.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true" x="787.0" y="510.0">
+                     <image>
+                        <Image url="@../../../pics/wall2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall14" fitHeight="82.0" fitWidth="96.0" layoutX="-8.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true" x="716.0" y="510.0">
+                     <image>
+                        <Image url="@../../../pics/wall.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall15" fitHeight="82.0" fitWidth="96.0" layoutX="-84.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true" x="720.0" y="505.0">
+                     <image>
+                        <Image url="@../../../pics/wall.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="camp3" fitHeight="121.0" fitWidth="117.0" layoutX="981.0" layoutY="495.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/army_camp_10.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="townhall" fitHeight="105.0" fitWidth="96.0" layoutX="752.0" layoutY="522.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/10.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall16" fitHeight="81.0" fitWidth="107.0" layoutX="-78.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true" x="792.0" y="510.0">
+                     <image>
+                        <Image url="@../../../pics/wall2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall17" fitHeight="82.0" fitWidth="96.0" layoutX="68.0" layoutY="65.0" pickOnBounds="true" preserveRatio="true" x="716.0" y="510.0">
+                     <image>
+                        <Image url="@../../../pics/wall.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="goldStorage2" fitHeight="98.0" fitWidth="93.0" layoutX="678.0" layoutY="589.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/gold_storage_11.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="cannon2" fitHeight="81.0" fitWidth="71.0" layoutX="749.0" layoutY="653.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/cannon_11.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall18" fitHeight="81.0" fitWidth="107.0" layoutX="133.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" x="792.0" y="510.0">
+                     <image>
+                        <Image url="@../../../pics/wall2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="cannon3" fitHeight="81.0" fitWidth="71.0" layoutX="893.0" layoutY="569.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/cannon_11.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="exirStorage2" fitHeight="74.0" fitWidth="82.0" layoutX="830.0" layoutY="604.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/elixir_storage_9.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall19" fitHeight="82.0" fitWidth="96.0" layoutX="209.0" layoutY="69.0" pickOnBounds="true" preserveRatio="true" x="716.0" y="510.0">
+                     <image>
+                        <Image url="@../../../pics/wall.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall20" fitHeight="81.0" fitWidth="107.0" layoutX="133.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true" x="792.0" y="510.0">
+                     <image>
+                        <Image url="@../../../pics/wall2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="archerTower3" fitHeight="104.0" fitWidth="83.0" layoutX="886.0" layoutY="629.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/Archer_Tower6B.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall21" fitHeight="81.0" fitWidth="107.0" layoutX="-8.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true" x="792.0" y="507.0">
+                     <image>
+                        <Image url="@../../../pics/wall2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall22" fitHeight="81.0" fitWidth="107.0" layoutX="61.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true" x="792.0" y="510.0">
+                     <image>
+                        <Image url="@../../../pics/wall2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall23" fitHeight="82.0" fitWidth="96.0" layoutX="209.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true" x="716.0" y="510.0">
+                     <image>
+                        <Image url="@../../../pics/wall.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="mine2" fitHeight="80.0" fitWidth="86.0" layoutX="528.0" layoutY="608.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/gold_mine_4.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="mine3" fitHeight="80.0" fitWidth="86.0" layoutX="981.0" layoutY="600.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/gold_mine_4.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall24" fitHeight="82.0" fitWidth="96.0" layoutX="-148.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true" x="716.0" y="510.0">
+                     <image>
+                        <Image url="@../../../pics/wall.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="archerTower4" fitHeight="104.0" fitWidth="83.0" layoutX="617.0" layoutY="619.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/Archer_Tower6B.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall25" fitHeight="81.0" fitWidth="107.0" layoutX="-224.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true" x="792.0" y="510.0">
+                     <image>
+                        <Image url="@../../../pics/wall2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall26" fitHeight="78.0" fitWidth="106.0" layoutX="-80.0" layoutY="181.0" pickOnBounds="true" preserveRatio="true" x="716.0" y="505.0">
+                     <image>
+                        <Image url="@../../../pics/wall.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall27" fitHeight="81.0" fitWidth="107.0" layoutX="-86.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true" x="792.0" y="510.0">
+                     <image>
+                        <Image url="@../../../pics/wall2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="wall28" fitHeight="82.0" fitWidth="96.0" layoutX="61.0" layoutY="169.0" pickOnBounds="true" preserveRatio="true" x="716.0" y="510.0">
+                     <image>
+                        <Image url="@../../../pics/wall.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="lab" fitHeight="91.0" fitWidth="95.0" layoutX="670.0" layoutY="713.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/laboratory_4.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="barrack1" fitHeight="90.0" fitWidth="87.0" layoutX="817.0" layoutY="701.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/barrack_6.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="barrack2" fitHeight="90.0" fitWidth="87.0" layoutX="970.0" layoutY="701.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/barrack_6.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="barrack3" fitHeight="90.0" fitWidth="87.0" layoutX="558.0" layoutY="385.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/barrack_6.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="archer1" fitHeight="34.0" fitWidth="22.0" layoutX="918.0" layoutY="433.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/troops/archer_5.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="archer2" fitHeight="34.0" fitWidth="22.0" layoutX="647.0" layoutY="519.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/troops/archer_5.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="archer3" fitHeight="34.0" fitWidth="31.0" layoutX="914.0" layoutY="631.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/troops/archer_5.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="archer4" fitHeight="34.0" fitWidth="22.0" layoutX="647.0" layoutY="626.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/troops/archer_5.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </Pane>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>
