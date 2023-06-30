@@ -1,16 +1,20 @@
 package model;
 
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 
-public class Building {
+public class Building /*extends Thread*/{
     private double x;
     private double y;
     private ImageView image;
+    private ProgressBar hpBar;
+    private int maxHP;
     private int HP;
     private String info;
 
     public Building(int HP, String info) {
         this.HP = HP;
+        this.maxHP = HP;
         this.info = info;
     }
 
@@ -31,9 +35,15 @@ public class Building {
         return image;
     }
 
+    public ProgressBar getHpBar() {
+        return hpBar;
+    }
+
     public String getInfo() {
         return info;
     }
+
+
 
     //setters
     public void setX(double x) {
@@ -48,7 +58,20 @@ public class Building {
         this.image = image;
     }
 
+    public void setHpBar(ProgressBar hpBar) {
+        this.hpBar = hpBar;
+    }
+
     public void setHP(int HP) {
         this.HP = HP;
+    }
+
+    public void updateHPbar(){
+        if(HP <= 0){
+            hpBar.setVisible(false);
+            HP = 0;
+        }
+        double percent = (double) HP / maxHP;
+        hpBar.setProgress(percent);
     }
 }

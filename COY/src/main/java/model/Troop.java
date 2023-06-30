@@ -2,19 +2,23 @@ package model;
 
 import javafx.animation.Transition;
 import javafx.animation.TranslateTransition;
+import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.util.Duration;
+import static java.lang.Thread.currentThread;
 
 import java.util.ArrayList;
 
 import static java.lang.Math.*;
 
-public class Troop extends Thread{
+public class Troop implements Runnable /*extends Thread*/{
     private double x;
     private double y;
     private ImageView image;
-    private ArrayList<Building> targets = new ArrayList<>();
+    private ProgressBar hpBar;
+    private ArrayList<Building> targets;
     private int HP;
+    private int maxHp;
     private int damage;
     private int range;
     private int movementSpeed;
@@ -24,12 +28,14 @@ public class Troop extends Thread{
     private Building target = null;
     private double distance = 0;
 
-    public Troop(double x, double y, ImageView image,ArrayList<Building> targets,int HP, int damage, int range,int movementSpeed, String info) {
+    public Troop(double x, double y, ImageView image,ProgressBar hpBar,ArrayList<Building> targets,int HP, int damage, int range,int movementSpeed, String info) {
         this.x = x;
         this.y = y;
         this.image = image;
+        this.hpBar = hpBar;
         this.targets = targets;
         this.HP = HP;
+        this.maxHp = HP;
         this.damage = damage;
         this.range = range;
         this.movementSpeed = movementSpeed;
@@ -64,6 +70,27 @@ public class Troop extends Thread{
         return y;
     }
 
+    public ImageView getImage() {
+        return image;
+    }
+
+    public ProgressBar getHpBar() {
+        return hpBar;
+    }
+
+    public ArrayList<Building> getTargets() {
+        return targets;
+    }
+
+    public Building getTarget() {
+        return target;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    //setters
     public void setX(double x) {
         this.x = x;
     }
@@ -76,14 +103,53 @@ public class Troop extends Thread{
         this.image = image;
     }
 
+    public void setHpBar(ProgressBar hpBar) {
+        this.hpBar = hpBar;
+    }
+
+    public void setHP(int HP) {
+        this.HP = HP;
+    }
+
+    public void setTargets(ArrayList<Building> targets) {
+        this.targets = targets;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
+    public void setRange(int range) {
+        this.range = range;
+    }
+
+    public void setMovementSpeed(int movementSpeed) {
+        this.movementSpeed = movementSpeed;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public void setTarget(Building target) {
+        this.target = target;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
+    }
+
     @Override
     public void run(){
         detectTarget();
-        move();
-        attack();
     }
 
     private void detectTarget(){
+        if(targets.size() == 0){
+            image.setVisible(false);
+            currentThread().interrupt();
+        }
+
         double minimumDistance = 2000;
 
         for (Building building : targets){
@@ -94,6 +160,7 @@ public class Troop extends Thread{
             }
         }
 
+        move();
     }
 
     private void move(){
@@ -106,7 +173,7 @@ public class Troop extends Thread{
 
 
 
-        while (distance > 0){
+        while (distance > range && HP > 0 && target.getHP() > 0){
             if(abs(x - target.getX()) < movementSpeed){
                 xReached = true;
 //                transition.setByX(0);
@@ -115,6 +182,7 @@ public class Troop extends Thread{
 //                transition.setByX(movementSpeed);
             }else if(x > target.getX()){
                 x -= movementSpeed;
+                hpBar.setLayoutX(hpBar.getLayoutX() - movementSpeed);
 //                transition.setByX(-movementSpeed);
             }
 
@@ -131,6 +199,8 @@ public class Troop extends Thread{
 
             image.setLayoutX(x);
             image.setLayoutY(y);
+            hpBar.setLayoutX(x);
+            hpBar.setLayoutY(y - 10);
 
             if(yReached && xReached){
                 distance = 0;
@@ -145,11 +215,23 @@ public class Troop extends Thread{
                 System.out.println(e.getStackTrace());
             }
         }
+
+        if(target.getHP() <= 0){
+            detectTarget();
+        }else if(HP <= 0){
+            image.setVisible(false);
+            currentThread().interrupt();
+        }else {
+            attack();
+        }
     }
 
     private void attack(){
-        while (target.getHP() > 0){
+        target.getHpBar().setVisible(true);
+
+        while (target.getHP() > 0 && HP > 0){
             target.setHP(target.getHP() - damage);
+            target.updateHPbar();
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -159,6 +241,20 @@ public class Troop extends Thread{
 
         if(target.getHP() <= 0){
             target.getImage().setVisible(false);
+            targets.remove(target);
+            detectTarget();
+        }else {
+            image.setVisible(false);
+            currentThread().interrupt();
         }
+    }
+
+    public void updateHPbar(){
+        if(HP <= 0){
+            hpBar.setVisible(false);
+            HP = 0;
+        }
+        double percent = (double) HP / maxHp;
+        hpBar.setProgress(percent);
     }
 }

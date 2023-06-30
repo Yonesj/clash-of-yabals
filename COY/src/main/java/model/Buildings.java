@@ -12,9 +12,9 @@ public class Buildings {
 
     public static Building exirCollector_1 = new Building(1000,"Elixir is pumped from the Ley Lines coursing underneath your village. Upgrade your Elixir Collectors to maximize elixir production.");
 
-    public static Defence cannon_1 = new Defence(1000,"Cannons are great for point defense. Upgrade cannons to increase their firepower, but beware that your defensive turrets cannot shoot while being upgraded!",90,8);
+    public static Defence cannon_1 = new Defence(1000,"Cannons are great for point defense. Upgrade cannons to increase their firepower, but beware that your defensive turrets cannot shoot while being upgraded!",500);
 
-    public static Defence archerTower_1 = new Defence(1000,"Archer Towers have longer range than cannons, and unlike cannons they can attack flying enemies.",80,10);
+    public static Defence archerTower_1 = new Defence(1000,"Archer Towers have longer range than cannons, and unlike cannons they can attack flying enemies.",80);
 
     public static Building barrack_1 = new Building(900,"The Barracks allow you to train troops to attack your enemies");
 
