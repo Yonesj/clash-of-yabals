@@ -1,5 +1,7 @@
 package model;
 
+import javafx.scene.control.ProgressBar;
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 
 import java.util.ArrayList;
@@ -17,6 +19,12 @@ public class Defence extends Building implements Runnable {
     ListIterator<Troop> iterator = targets.listIterator();
     private Troop target;
     private double distance = 0;
+
+    public Defence(double x, double y, ImageView image, ProgressBar hpBar, int HP, String info, int damage, Circle range) {
+        super(x, y, image, hpBar, HP, info);
+        this.damage = damage;
+        this.range = range;
+    }
 
     public Defence(int HP, String info, int damage) {
         super(HP, info);

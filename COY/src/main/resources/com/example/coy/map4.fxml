@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="1155.0" prefWidth="1546.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coy.Map4Controller">
+   <children>
+      <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" pannable="true" prefHeight="1155.0" prefWidth="1546.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+            <AnchorPane fx:id="anchorPane" prefHeight="1155.0" prefWidth="1546.0">
+               <children>
+                  <ImageView fx:id="map" fitHeight="1190.0" fitWidth="1546.0" layoutY="-7.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-7.0">
+                     <image>
+                        <Image url="@../../../pics/map1.jpg" />
+                     </image>
+                  </ImageView>
+                  <Circle fx:id="archerRange" fill="WHITE" layoutX="723.0" layoutY="641.0" opacity="0.18" radius="157.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+                  <Circle fx:id="cannonRange" fill="WHITE" layoutX="867.0" layoutY="531.0" opacity="0.18" radius="141.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+                  <ImageView fitHeight="98.0" fitWidth="84.0" layoutX="715.0" layoutY="771.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/4/Clan_Castle_Ruin.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="camp1" fitHeight="84.0" fitWidth="100.0" layoutX="666.0" layoutY="464.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/4/army_camp_4.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="camp2" fitHeight="84.0" fitWidth="100.0" layoutX="673.0" layoutY="674.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/4/army_camp_4.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="barrack2" fitHeight="97.0" fitWidth="96.0" layoutX="850.0" layoutY="615.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/4/barrack_2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="barrack1" fitHeight="97.0" fitWidth="96.0" layoutX="771.0" layoutY="674.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/4/barrack_2.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="cannon" fitHeight="108.0" fitWidth="82.0" layoutX="826.0" layoutY="490.0" onMouseClicked="#makeCannonRangeVisible" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/4/cannon_3.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="exirStorage" fitHeight="72.0" fitWidth="69.0" layoutX="898.0" layoutY="539.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/4/elixir_storage_7.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="mine" fitHeight="107.0" fitWidth="77.0" layoutX="616.0" layoutY="620.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/4/gold_mine_4.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="exircollector" fitHeight="84.0" fitWidth="80.0" layoutX="759.0" layoutY="426.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/4/elixir_collector_5.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="townhall" fitHeight="105.0" fitWidth="96.0" layoutX="739.0" layoutY="538.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/4/5.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="goldStorage" fitHeight="119.0" fitWidth="84.0" layoutX="599.0" layoutY="531.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/4/gold_storage_3.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="archerTower" fitHeight="86.0" fitWidth="59.0" layoutX="693.0" layoutY="590.0" onMouseClicked="#makeArcherRangeVisible" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/4/archer_tower_4.png" />
+                     </image>
+                  </ImageView>
+                  <ProgressBar fx:id="archerHP" layoutX="697.0" layoutY="583.0" prefHeight="14.0" prefWidth="51.0" progress="1.0" visible="false" />
+                  <ProgressBar fx:id="mineHP" layoutX="629.0" layoutY="620.0" prefHeight="14.0" prefWidth="51.0" progress="1.0" visible="false" />
+                  <ProgressBar fx:id="camp2HP" layoutX="697.0" layoutY="675.0" prefHeight="14.0" prefWidth="51.0" progress="1.0" visible="false" />
+                  <ProgressBar fx:id="barrack1HP" layoutX="786.0" layoutY="682.0" prefHeight="14.0" prefWidth="51.0" progress="1.0" visible="false" />
+                  <ProgressBar fx:id="barrack2Hp" layoutX="866.0" layoutY="620.0" prefHeight="14.0" prefWidth="51.0" progress="1.0" visible="false" />
+                  <ProgressBar fx:id="exirStorageHP" layoutX="907.0" layoutY="535.0" prefHeight="14.0" prefWidth="51.0" progress="1.0" visible="false" />
+                  <ProgressBar fx:id="cannonHp" layoutX="841.0" layoutY="490.0" prefHeight="14.0" prefWidth="51.0" progress="1.0" visible="false" />
+                  <ProgressBar fx:id="exircollectorHp" layoutX="773.0" layoutY="426.0" prefHeight="14.0" prefWidth="51.0" progress="1.0" visible="false" />
+                  <ProgressBar fx:id="camp1HP" layoutX="689.0" layoutY="466.0" prefHeight="14.0" prefWidth="51.0" progress="1.0" visible="false" />
+                  <ProgressBar fx:id="goldStorageHP" layoutX="616.0" layoutY="532.0" prefHeight="14.0" prefWidth="51.0" progress="1.0" visible="false" />
+                  <ProgressBar fx:id="townhallHP" layoutX="760.0" layoutY="535.0" prefHeight="14.0" prefWidth="51.0" progress="1.0" visible="false" />
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+   </children>
+</AnchorPane>

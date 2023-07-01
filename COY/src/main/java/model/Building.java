@@ -12,9 +12,19 @@ public class Building /*extends Thread*/{
     private int HP;
     private String info;
 
-    public Building(int HP, String info) {
+    public Building(double x, double y, ImageView image, ProgressBar hpBar, int HP, String info) {
+        this.x = x;
+        this.y = y;
+        this.image = image;
+        this.hpBar = hpBar;
         this.HP = HP;
         this.maxHP = HP;
+        this.info = info;
+    }
+
+    public Building(int HP, String info) {
+        this.HP = HP;
+
         this.info = info;
     }
 
