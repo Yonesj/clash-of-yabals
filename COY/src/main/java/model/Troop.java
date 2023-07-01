@@ -17,18 +17,20 @@ public class Troop implements Runnable /*extends Thread*/{
     private ImageView image;
     private ProgressBar hpBar;
     private ArrayList<Building> targets;
+    private ArrayList<Building> favoriteTargets = new ArrayList<>();
     private int HP;
     private int maxHp;
     private int damage;
     private int range;
     private int movementSpeed;
     private String info;
+    private FavoriteTarget favoriteTarget;
 
 
     private Building target = null;
     private double distance = 0;
 
-    public Troop(double x, double y, ImageView image,ProgressBar hpBar,ArrayList<Building> targets,int HP, int damage, int range,int movementSpeed, String info) {
+    public Troop(double x, double y, ImageView image,ProgressBar hpBar,ArrayList<Building> targets,int HP, int damage, int range,int movementSpeed,FavoriteTarget favoriteTarget, String info) {
         this.x = x;
         this.y = y;
         this.image = image;
@@ -39,7 +41,28 @@ public class Troop implements Runnable /*extends Thread*/{
         this.damage = damage;
         this.range = range;
         this.movementSpeed = movementSpeed;
+        this.favoriteTarget = favoriteTarget;
         this.info = info;
+
+        if(favoriteTarget != FavoriteTarget.ANY){
+            fillFavoriteTargets();
+        }
+    }
+
+    private void fillFavoriteTargets(){
+        if(favoriteTarget == FavoriteTarget.DEFENCE){
+            for (Building target : targets){
+                if(target instanceof Defence){
+                    favoriteTargets.add(target);
+                }
+            }
+        }else if(favoriteTarget == FavoriteTarget.RESOURCE){
+            for (Building target : targets){
+                if(target instanceof Resourse){
+                    favoriteTargets.add(target);
+                }
+            }
+        }
     }
 
     public int getHP() {
@@ -141,7 +164,11 @@ public class Troop implements Runnable /*extends Thread*/{
 
     @Override
     public void run(){
-        detectTarget();
+        while (HP > 0) {
+            detectTarget();
+            move();
+            attack();
+        }
     }
 
     private void detectTarget(){
@@ -152,49 +179,45 @@ public class Troop implements Runnable /*extends Thread*/{
 
         double minimumDistance = 2000;
 
-        for (Building building : targets){
-            distance = sqrt(pow(x - building.getX(),2) + pow(y - building.getY(),2));
-            if(distance < minimumDistance){
-                minimumDistance = distance;
-                target = building;
+        if(favoriteTarget != FavoriteTarget.ANY && favoriteTargets.size() != 0){
+            for (Building building : favoriteTargets) {
+                distance = sqrt(pow(x - building.getX(), 2) + pow(y - building.getY(), 2));
+                if (distance < minimumDistance) {
+                    minimumDistance = distance;
+                    target = building;
+                }
+            }
+        }else {
+            for (Building building : targets) {
+                distance = sqrt(pow(x - building.getX(), 2) + pow(y - building.getY(), 2));
+                if (distance < minimumDistance) {
+                    minimumDistance = distance;
+                    target = building;
+                }
             }
         }
-
-        move();
+//        move();
     }
 
     private void move(){
         boolean xReached = false;
         boolean yReached = false;
-//        TranslateTransition transition = new TranslateTransition();
-//        transition.setNode(image);
-//        transition.setDuration(Duration.millis(1000));
-//        transition.setAutoReverse(false);
-
-
 
         while (distance > range && HP > 0 && target.getHP() > 0){
             if(abs(x - target.getX()) < movementSpeed){
                 xReached = true;
-//                transition.setByX(0);
             }else if(x < target.getX()) {
                 x += movementSpeed;
-//                transition.setByX(movementSpeed);
             }else if(x > target.getX()){
                 x -= movementSpeed;
-                hpBar.setLayoutX(hpBar.getLayoutX() - movementSpeed);
-//                transition.setByX(-movementSpeed);
             }
 
             if(abs(y - target.getY()) < movementSpeed){
                 yReached = true;
-//                transition.setByY(0);
             }else if(y < target.getY()){
                 y += movementSpeed;
-//                transition.setByY(movementSpeed);
             }else if(y > target.getY()){
                 y -= movementSpeed;
-//                transition.setByY(-movementSpeed);
             }
 
             image.setLayoutX(x);
@@ -208,7 +231,6 @@ public class Troop implements Runnable /*extends Thread*/{
                 distance = sqrt(pow(x - target.getX(), 2) + pow(y - target.getY(), 2));
             }
 
-//            transition.play();
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -216,14 +238,16 @@ public class Troop implements Runnable /*extends Thread*/{
             }
         }
 
-        if(target.getHP() <= 0){
-            detectTarget();
-        }else if(HP <= 0){
+        if(HP <= 0){
             image.setVisible(false);
             currentThread().interrupt();
-        }else {
-            attack();
         }
+//        else if(target.getHP() <= 0){
+//            detectTarget();
+//        }
+//        else {
+//            attack();
+//        }
     }
 
     private void attack(){
@@ -242,7 +266,8 @@ public class Troop implements Runnable /*extends Thread*/{
         if(target.getHP() <= 0){
             target.getImage().setVisible(false);
             targets.remove(target);
-            detectTarget();
+            favoriteTargets.remove(target);
+//            detectTarget();
         }else {
             image.setVisible(false);
             currentThread().interrupt();
@@ -258,3 +283,16 @@ public class Troop implements Runnable /*extends Thread*/{
         hpBar.setProgress(percent);
     }
 }
+
+
+//        TranslateTransition transition = new TranslateTransition();
+//        transition.setNode(image);
+//        transition.setDuration(Duration.millis(1000));
+//        transition.setAutoReverse(false);
+//                transition.setByX(0);
+//                transition.setByX(movementSpeed);
+//                transition.setByX(-movementSpeed);
+//                transition.setByY(0);
+//                transition.setByY(movementSpeed);
+//                transition.setByY(-movementSpeed);
+//            transition.play();
