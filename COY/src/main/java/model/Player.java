@@ -2,23 +2,57 @@ package model;
 
 public class Player {
     private int id;
-    private static int playerCounter = 1;
+    private static int playerCounter = 5;
     private String username;
     private String password;
     private int level;
     private int losses;
     private int wins;
-    private Map map;
+    private String map;
 
-    public Player(String username, String password, int level, Map map) {
+    public Player(int id,String username, String password, int level, String map) {
+        if(id == 0){
+            this.id = playerCounter++;
+        }else {
+            this.id = id;
+        }
         this.username = username;
         this.password = password;
         this.level = level;
         this.map = map;
-        this.id = playerCounter++;
         this.wins = 0;
         this.losses = 0;
     }
 
+    public int getId() {
+        return id;
+    }
 
+    public static int getPlayerCounter() {
+        return playerCounter;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public int getLosses() {
+        return losses;
+    }
+
+    public int getWins() {
+        return wins;
+    }
+
+    public String getMap() {
+        return map;
+    }
 }
