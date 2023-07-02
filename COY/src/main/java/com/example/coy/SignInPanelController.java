@@ -106,6 +106,24 @@ public class SignInPanelController implements Initializable {
                     Stage stage = (Stage) source.getScene().getWindow();
                     stage.hide();
 
+                    switch (player.getMap()){
+                        case "map1":
+                            Map1Controller.defenderPlayer = player;
+                            Map1Controller.attackMode = false;
+                            break;
+                        case "map2":
+                            Map2Controller.defenderPlayer = player;
+                            Map2Controller.attackMode = false;
+                            break;
+                        case "map3":
+                            Map3Controller.defenderPlayer = player;
+                            Map3Controller.attackMode = false;
+                            break;
+                        case "map4":
+                            Map4Controller.defenderPlayer = player;
+                            Map4Controller.attackMode = true;
+                    }
+
                     Parent root1 = null;
                     try {
                         root1 = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(player.getMap() + ".fxml")));
