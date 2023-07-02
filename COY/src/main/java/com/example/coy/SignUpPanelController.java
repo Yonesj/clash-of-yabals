@@ -12,18 +12,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import model.Map;
-import model.Maps;
 import model.Player;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.*;
-import java.time.LocalDateTime;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class SignInPanelController implements Initializable {
+public class SignUpPanelController implements Initializable {
     //sql constance
     private final String url = "jdbc:mysql://localhost/usersData";
     private final String usernameDB = "root";
@@ -35,6 +35,7 @@ public class SignInPanelController implements Initializable {
 
     @FXML
     private ImageView background;
+
     @FXML
     private Label emptyPassword;
 
@@ -54,41 +55,38 @@ public class SignInPanelController implements Initializable {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection connection = DriverManager.getConnection(url, usernameDB, passwordDB);
 
-            String command = "SELECT data.userID , data.username, data.password, data.level, data.winCount, data.losses, data.map FROM data";
+            String command = "SELECT data.userID , data.username FROM data";
             Statement statement = connection.prepareStatement(command);
             resultTable = statement.executeQuery(command);
 
             String user = null;
-            String pass = null;
 
             while (resultTable.next()) {
                 user = resultTable.getString("username");
                 if(user.equals(username)){
-                    pass = resultTable.getString("password");
-                    if(pass.equals(password)){
-                        player = new Player(resultTable.getInt("userID"),resultTable.getString("username"),resultTable.getString("password"),
-                                resultTable.getInt("level"),resultTable.getString("map"));
-
-                        return true;
-                    }else {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setContentText("incorrect password!");
-                        alert.show();
-                        return false;
-                    }
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("this username is unavailable!");
+                    alert.show();
+                    return false;
                 }
             }
+
+            player = new Player(0,username,password, 1,"map4");
+
+            String command2 = String.format("INSERT INTO `data` (`userID`, `username`, `password`, `level`, `winCount`, `losses`, `map`) VALUES (`%d`,`%s`,`%s`,`%d`,`%d`,`%d`,`%s`)",
+                    player.getId(),player.getUsername(),player.getPassword(),player.getLevel(),player.getWins(),player.getLosses(),player.getMap());
+            Statement statement2 = connection.prepareStatement(command2);
+            statement2.executeUpdate(command2);
 
             connection.close();
         } catch (Exception e) {
             System.out.println(e);
         }
 
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setContentText("user not found 404:)");
-        alert.show();
-        return false;
+
+        return true;
     }
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -108,7 +106,7 @@ public class SignInPanelController implements Initializable {
 
                     Parent root1 = null;
                     try {
-                        root1 = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(player.getMap() + ".fxml")));
+                        root1 = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("map4.fxml")));
                     } catch (IOException e) {
                         throw new RuntimeException(e);
                     }
@@ -121,4 +119,5 @@ public class SignInPanelController implements Initializable {
             }
         });
     }
+
 }

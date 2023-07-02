@@ -28,10 +28,6 @@ public class Player {
         return id;
     }
 
-    public static int getPlayerCounter() {
-        return playerCounter;
-    }
-
     public String getUsername() {
         return username;
     }

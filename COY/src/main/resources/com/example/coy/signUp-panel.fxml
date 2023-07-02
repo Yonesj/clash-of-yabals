@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="661.0" prefWidth="372.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coy.SignUpPanelController">
+   <children>
+      <ImageView fx:id="background" fitHeight="662.0" fitWidth="410.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <image>
+            <Image url="@../../../pics/Barbarians.jpg" />
+         </image>
+      </ImageView>
+      <TextField fx:id="usernameInputTextField" layoutX="46.0" layoutY="66.0" prefHeight="47.0" prefWidth="282.0" promptText="username" style="-fx-background-color: FFA500;">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="passwordInputTextField" layoutX="46.0" layoutY="135.0" prefHeight="47.0" prefWidth="282.0" promptText="password" style="-fx-background-color: FFA500;">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Label fx:id="emptyUsername" layoutX="46.0" layoutY="113.0" prefHeight="18.0" prefWidth="164.0" style="-fx-padding: 2;" text="this field can't be empty!" textFill="WHITE" visible="false">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Label>
+      <Label fx:id="emptyPassword" layoutX="46.0" layoutY="182.0" prefHeight="18.0" prefWidth="164.0" style="-fx-padding: 2;" text="this field can't be empty!" textFill="WHITE" visible="false">
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+      </Label>
+   </children>
+</AnchorPane>
