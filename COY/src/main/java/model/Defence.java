@@ -1,5 +1,7 @@
 package model;
 
+import com.example.coy.Map2Controller;
+import com.example.coy.Map4Controller;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
@@ -53,10 +55,65 @@ public class Defence extends Building implements Runnable {
 
     @Override
     public void run() {
-        detectTarget();
+        while (getHP() > 0) {
+            detectTarget();
+            defend();
+        }
     }
 
     private void detectTarget() {
+        synchronized (Map4Controller.troops) {
+            targets = Map4Controller.troops;
+        }
+
+        synchronized (targets) {
+            for (Troop troop : targets) {
+                if (abs(troop.getX() - getX()) <= range.getRadius()) {
+                    if (abs(troop.getY() - getY()) <= range.getRadius()) {
+                        target = troop;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    private void defend() {
+        if(target != null) {
+            target.getHpBar().setVisible(true);
+
+            while (target.getHP() > 0 && getHP() > 0) {
+                target.setHP(target.getHP() - damage);
+                target.updateHPbar();
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    System.out.println(e.getStackTrace());
+                }
+            }
+
+            if (target.getHP() <= 0) {
+                target.getImage().setVisible(false);
+                target.getHpBar().setVisible(false);
+                targets.remove(target);
+                target = null;
+                detectTarget();
+            } else {
+                getImage().setVisible(false);
+                currentThread().interrupt();
+            }
+        }
+    }
+
+    public void myNotify(){
+        synchronized (this) {
+            this.notify();
+        }
+    }
+}
+
+
+/*
         if (getHP() > 0) {
             if(targets.size() == 0){
                 synchronized (this) {
@@ -109,36 +166,4 @@ public class Defence extends Building implements Runnable {
         }
 
         defend();
-    }
-
-    private void defend() {
-        target.getHpBar().setVisible(true);
-
-        while (target.getHP() > 0 && getHP() > 0) {
-            target.setHP(target.getHP() - damage);
-            target.updateHPbar();
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                System.out.println(e.getStackTrace());
-            }
-        }
-
-        if (target.getHP() <= 0) {
-            target.getImage().setVisible(false);
-            target.getHpBar().setVisible(false);
-            targets.remove(target);
-            target = null;
-            detectTarget();
-        } else {
-            getImage().setVisible(false);
-            currentThread().interrupt();
-        }
-    }
-
-    public void myNotify(){
-        synchronized (this) {
-            this.notify();
-        }
-    }
-}
+ */

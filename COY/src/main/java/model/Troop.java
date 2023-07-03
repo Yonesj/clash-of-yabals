@@ -270,7 +270,7 @@ public class Troop implements Runnable /*extends Thread*/{
 //            detectTarget();
         }else {
             image.setVisible(false);
-            currentThread().interrupt();
+//            currentThread().interrupt();
         }
     }
 

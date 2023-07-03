@@ -24,7 +24,7 @@ public class Building /*extends Thread*/{
 
     public Building(int HP, String info) {
         this.HP = HP;
-
+        this.maxHP = HP;
         this.info = info;
     }
 

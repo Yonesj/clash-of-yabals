@@ -73,10 +73,9 @@ public class SignUpPanelController implements Initializable {
 
             player = new Player(0,username,password, 1,"map4");
 
-            String command2 = String.format("INSERT INTO `data` (`userID`, `username`, `password`, `level`, `winCount`, `losses`, `map`) VALUES (`%d`,`%s`,`%s`,`%d`,`%d`,`%d`,`%s`)",
-                    player.getId(),player.getUsername(),player.getPassword(),player.getLevel(),player.getWins(),player.getLosses(),player.getMap());
+            String command2 = String.format("INSERT INTO `data` (`userID`, `username`, `password`, `level`, `winCount`, `losses`, `map`) VALUES ('%d', '%s', '%s', '1', '0', '0', 'map4')",player.getId(),username,password);
             Statement statement2 = connection.prepareStatement(command2);
-            statement2.executeUpdate(command2);
+            statement2.execute(command2);
 
             connection.close();
         } catch (Exception e) {
@@ -104,11 +103,14 @@ public class SignUpPanelController implements Initializable {
                     Stage stage = (Stage) source.getScene().getWindow();
                     stage.hide();
 
+                    Map4Controller.attackMode =false;
+                    Map4Controller.defenderPlayer = player;
+
                     Parent root1 = null;
                     try {
                         root1 = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("map4.fxml")));
                     } catch (IOException e) {
-                        throw new RuntimeException(e);
+                        System.out.println(e.getStackTrace());
                     }
                     Scene scene1 = new Scene(root1, 480, 320);
                     Stage stage1 = new Stage();
