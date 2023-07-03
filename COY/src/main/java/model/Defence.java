@@ -96,8 +96,8 @@ public class Defence extends Building implements Runnable {
                 target.getImage().setVisible(false);
                 target.getHpBar().setVisible(false);
                 targets.remove(target);
+                Map4Controller.troops.remove(target);
                 target = null;
-                detectTarget();
             } else {
                 getImage().setVisible(false);
                 currentThread().interrupt();

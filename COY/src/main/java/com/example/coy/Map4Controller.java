@@ -1,17 +1,17 @@
 package com.example.coy;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.effect.DropShadow;
-import javafx.scene.effect.Shadow;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -27,23 +27,36 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Map4Controller implements Initializable {
     public static Player defenderPlayer;
     public static Player attackerPlayer;
     public static boolean attackMode;
     private Random rand = new Random();
+    private ExecutorService executorService = Executors.newCachedThreadPool();
 
+    private Map currentMap;
+    private Building townhallB;
+    public static ArrayList<Troop> troops = new ArrayList<>();
 
     //sql constance
     private final String url = "jdbc:mysql://localhost/usersData";
     private final String usernameDB = "root";
     private final String passwordDB = "1111";
 
-
+    //attack
+    private boolean isBarbarSelected = false;
+    private boolean isGiantSelected = false;
+    private boolean isAttackStarted;
+    private int giantCount = 6;
+    private int barbarCount = 12;
     @FXML
     private AnchorPane anchorPane;
 
@@ -164,6 +177,27 @@ public class Map4Controller implements Initializable {
     private ImageView cancelAttackButton;
     @FXML
     private ImageView nextMapButton;
+    @FXML
+    private Rectangle barbarSelected;
+    @FXML
+    private Rectangle giantSelected;
+    @FXML
+    private Label timeLabel;
+
+    //
+    @FXML
+    private Rectangle resultPanel;
+    @FXML
+    private ImageView star1;
+    @FXML
+    private ImageView star2;
+    @FXML
+    private ImageView star3;
+    @FXML
+    private Label percentage;
+    @FXML
+    private ImageView returnHomeButton;
+
 
     //troops variables
     @FXML
@@ -233,13 +267,13 @@ public class Map4Controller implements Initializable {
             }
 
             int id = rand.nextInt(size);
-            String command2 = String.format( "SELECT data.userID , data.username, data.password, data.level, data.winCount, data.losses, data.map FROM data WHERE data.userID = %d",id);
+            String command2 = String.format("SELECT data.userID , data.username, data.password, data.level, data.winCount, data.losses, data.map FROM data WHERE data.userID = %d", id);
             Statement statement2 = connection.prepareStatement(command2);
             ResultSet result = statement2.executeQuery(command2);
 
             result.next();
-            target = new Player(result.getInt("userID"),result.getString("username"),result.getString("password"),
-                    result.getInt("level"),result.getString("map"));
+            target = new Player(result.getInt("userID"), result.getString("username"), result.getString("password"),
+                    result.getInt("level"), result.getString("map"));
 
             connection.close();
         } catch (Exception e) {
@@ -247,7 +281,7 @@ public class Map4Controller implements Initializable {
         }
 
 
-        switch (target.getMap()){
+        switch (target.getMap()) {
             case "map1":
                 Map1Controller.defenderPlayer = target;
                 Map1Controller.attackerPlayer = this.defenderPlayer;
@@ -286,6 +320,138 @@ public class Map4Controller implements Initializable {
         stage1.show();
     }
 
+    @FXML
+    void goToNextMap(MouseEvent event) {
+        attack(event);
+    }
+
+    @FXML
+    void selectBarBar(MouseEvent event) {
+        isBarbarSelected = true;
+        isGiantSelected = false;
+
+        barbarSelected.setVisible(true);
+        giantSelected.setVisible(false);
+    }
+
+    @FXML
+    void selectGiant(MouseEvent event) {
+        isGiantSelected = true;
+        isBarbarSelected = false;
+
+        barbarSelected.setVisible(false);
+        giantSelected.setVisible(true);
+    }
+
+    @FXML
+    void startAttack(MouseEvent event) throws InterruptedException {
+        nextMapButton.setVisible(false);
+        timeLabel.setVisible(true);
+
+        isAttackStarted = true;
+
+        Timer timer = new Timer(timeLabel);
+        timer.map4Controller = this;
+        executorService.execute(timer);
+
+//        int leftTime = 120;
+//        while (leftTime >= 0) {
+//            timeLabel.setText(Integer.toString(leftTime) + " S");
+//            leftTime--;
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                System.out.println(e.getStackTrace());
+//            }
+//        }
+    }
+
+    @FXML
+    void endBattle(MouseEvent event) {
+        showResultPanel();
+    }
+
+    public void showResultPanel(){
+        executorService.shutdownNow();
+
+        resultPanel.setVisible(true);
+        returnHomeButton.setVisible(true);
+
+        int percent = (int) (((11.0 - currentMap.getBuildings().size()) / 11.0) * 100);
+        Platform.runLater(new Runnable() {
+            @Override
+            public void run() {
+                percentage.setText(Integer.toString(percent));
+                percentage.setVisible(true);
+            }
+        });
+
+
+        int starCount = 0;
+        for (Building building: currentMap.getBuildings()){
+            if(building == townhallB){
+                starCount++;
+                break;
+            }
+        }
+        if(percent > 50){
+            starCount++;
+        }
+        if(percent == 100){
+            starCount++;
+        }
+
+        switch (starCount){
+            case 1:
+                star1.setVisible(true);
+                break;
+            case 2:
+                star1.setVisible(true);
+                star2.setVisible(true);
+                break;
+            case 3:
+                star1.setVisible(true);
+                star2.setVisible(true);
+                star3.setVisible(true);
+        }
+    }
+
+    @FXML
+    void goToHomeMap(MouseEvent event) {
+        Node source = (Node) event.getSource();
+        Stage stage = (Stage) source.getScene().getWindow();
+        stage.hide();
+
+        switch (attackerPlayer.getMap()){
+            case "map1":
+                Map1Controller.defenderPlayer = attackerPlayer;
+                Map1Controller.attackMode = false;
+                break;
+            case "map2":
+                Map2Controller.defenderPlayer = attackerPlayer;
+                Map2Controller.attackMode = false;
+                break;
+            case "map3":
+                Map3Controller.defenderPlayer = attackerPlayer;
+                Map3Controller.attackMode = false;
+                break;
+            case "map4":
+                Map4Controller.defenderPlayer = attackerPlayer;
+                Map4Controller.attackMode = false;
+        }
+
+        Parent root1 = null;
+        try {
+            root1 = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(attackerPlayer.getMap() + ".fxml")));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Scene scene1 = new Scene(root1, 480, 320);
+        Stage stage1 = new Stage();
+        stage1.setFullScreen(true);
+        stage1.setScene(scene1);
+        stage1.show();
+    }
     @FXML
     void troopsInfo(MouseEvent event) {
         troopsLabel.setVisible(true);
@@ -483,8 +649,6 @@ public class Map4Controller implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        Map currentMap = setUpMap();
-
         rectangle1.setVisible(true);
         rectangle2.setVisible(true);
         star.setVisible(true);
@@ -492,7 +656,9 @@ public class Map4Controller implements Initializable {
         usernameField.setText(defenderPlayer.getUsername());
         usernameField.setVisible(true);
 
-        if(attackMode){
+        if (attackMode) {
+            currentMap = setUpMap();
+
             attackButton.setVisible(false);
             troopButton.setVisible(false);
 
@@ -505,8 +671,10 @@ public class Map4Controller implements Initializable {
             cancelAttackButton.setVisible(true);
             nextMapButton.setVisible(true);
 
-            giantIcon.setEffect(new DropShadow(10,Color.BLACK));
-        }else {
+            giantIcon.setEffect(new DropShadow(10, Color.BLACK));
+        } else {
+            currentMap = null;
+
             attackBar.setVisible(false);
             barbarIcon.setVisible(false);
             giantIcon.setVisible(false);
@@ -519,50 +687,111 @@ public class Map4Controller implements Initializable {
             attackButton.setVisible(true);
             troopButton.setVisible(true);
         }
+
+
+        if (attackMode) {
+            Defence archerTowerB = new Defence(archerTower.getLayoutX(), archerTower.getLayoutY(), archerTower, archerHP, 1000,
+                    "Archer Towers have longer range than cannons, and unlike cannons they can attack flying enemies.",
+                    300, archerRange);
+
+            Defence cannonB = new Defence(cannon.getLayoutX(), cannon.getLayoutY(), cannon, cannonHp, 1000,
+                    "Cannons are great for point defense. Upgrade cannons to increase their firepower, but beware that your defensive turrets cannot shoot while being upgraded!",
+                    300, cannonRange);
+
+            currentMap.addBuilding(archerTowerB);
+            currentMap.addBuilding(cannonB);
+
+            executorService.execute(cannonB);
+            executorService.execute(archerTowerB);
+        }
+
+        Image giantImage = new Image("giant_7.png");
+        Image barbarImage = new Image("barbarian_9.png");
+
+        map.setOnMouseClicked(event -> {
+            if (attackMode && isAttackStarted) {
+                double x = event.getSceneX();
+                double y = 0;
+                if (scrollPane.getVvalue() == 0) {
+                    y = event.getSceneY();
+                } else {
+                    y = event.getSceneY() + (scrollPane.getVvalue() * 300);
+                }
+
+                ProgressBar heroHp = new ProgressBar(1);
+                heroHp.setVisible(false);
+                heroHp.setLayoutX(x);
+                heroHp.setLayoutY(y - 10);
+                heroHp.setPrefSize(50, 15);
+
+                ImageView hero = new ImageView();
+                hero.setLayoutX(x);
+                hero.setLayoutY(y);
+
+                Troop troop = null;
+
+                if (isBarbarSelected && (barbarCount != 0)) {
+                    hero.setImage(barbarImage);
+                    hero.setFitWidth(40);
+                    hero.setFitHeight(50);
+
+                    troop = new Troop(x, y, hero, heroHp, currentMap.getBuildings(), 300, 100, 0, 30, FavoriteTarget.ANY, "This fearless warrior relies on his bulging muscles and striking mustache to wreak havoc in enemy villages. Release a horde of Barbarians and enjoy the mayhem!");
+                    barbarCount--;
+                } else if (isGiantSelected && (giantCount != 0)) {
+                    hero.setImage(giantImage);
+                    hero.setFitWidth(50);
+                    hero.setFitHeight(60);
+
+                    troop = new Troop(x, y, hero, heroHp, currentMap.getBuildings(), 1300, 100, 0, 30, FavoriteTarget.DEFENCE, "These big guys may seem calm, but show them a turret or cannon and you'll see their fury unleashed! Slow yet durable, these warriors are best used to soak up hits");
+                    giantCount--;
+                }
+
+                if (troop != null) {
+                    anchorPane.getChildren().addAll(hero, heroHp);
+
+                    synchronized (troops) {
+                        troops.add(troop);
+                    }
+                    executorService.execute(troop);
+                }
+//            cannonB.myNotify();
+//            archerB.myNotify();
+            }
+        });
     }
 
 
-    private Map setUpMap(){
+    private Map setUpMap() {
         Map map = Maps.map4;
 
-        Building townhallB = new Building(townhall.getLayoutX(),townhall.getLayoutY() + 20,townhall,townhallHP,5000,
+        townhallB = new Building(townhall.getLayoutX(), townhall.getLayoutY() + 20, townhall, townhallHP, 5000,
                 "This is the heart of your village. Upgrading your Town Hall unlocks new defenses, buildings, traps and much more.");
 
-        Defence archerTowerB = new Defence(archerTower.getLayoutX(),archerTower.getLayoutY(),archerTower,archerHP,1000,
-                "Archer Towers have longer range than cannons, and unlike cannons they can attack flying enemies.",
-                300,archerRange);
-
-        Defence cannonB = new Defence(cannon.getLayoutX(),cannon.getLayoutY(),cannon,cannonHp,1000,
-                "Cannons are great for point defense. Upgrade cannons to increase their firepower, but beware that your defensive turrets cannot shoot while being upgraded!",
-                300,cannonRange);
-
-        Resourse exirStorageB = new Resourse(exirStorage.getLayoutX(),exirStorage.getLayoutY(),exirStorage,exirStorageHP,0,
+        Resourse exirStorageB = new Resourse(exirStorage.getLayoutX(), exirStorage.getLayoutY(), exirStorage, exirStorageHP, 700,
                 "These storages contain the elixir pumped from underground.");
 
-        Resourse goldStorageB =  new Resourse(goldStorage.getLayoutX(),goldStorage.getLayoutY(),goldStorage,goldStorageHP,0,
+        Resourse goldStorageB = new Resourse(goldStorage.getLayoutX(), goldStorage.getLayoutY(), goldStorage, goldStorageHP, 700,
                 "All your precious gold is stored here. Don't let sneaky goblins anywhere near!");
 
-        Resourse mineB = new Resourse(mine.getLayoutX(),mine.getLayoutY(),mine,goldStorageHP,0,
+        Resourse mineB = new Resourse(mine.getLayoutX(), mine.getLayoutY(), mine, mineHP, 500,
                 "\"The Gold Mine produces gold. Upgrade it to boost its production and gold storage capacity.\"");
 
-        Resourse exircollectorB = new Resourse(exircollector.getLayoutX(),exircollector.getLayoutY(),exircollector,exircollectorHp,0,
+        Resourse exircollectorB = new Resourse(exircollector.getLayoutX(), exircollector.getLayoutY(), exircollector, exircollectorHp, 500,
                 "Elixir is pumped from the Ley Lines coursing underneath your village. Upgrade your Elixir Collectors to maximize elixir production.");
 
-        Building camp1B = new Building(camp1.getLayoutX(),camp1.getLayoutY(),camp1,camp1HP,0,
+        Building camp1B = new Building(camp1.getLayoutX(), camp1.getLayoutY(), camp1, camp1HP, 400,
                 "Your troops are stationed in Army Camps. Build more camps and upgrade them to muster a powerful army.");
 
-        Building camp2B = new Building(camp2.getLayoutX(),camp2.getLayoutY(),camp2,camp2HP,0,
+        Building camp2B = new Building(camp2.getLayoutX(), camp2.getLayoutY(), camp2, camp2HP, 400,
                 "Your troops are stationed in Army Camps. Build more camps and upgrade them to muster a powerful army.");
 
-        Building barrack1B = new Building(barrack1.getLayoutX(),barrack1.getLayoutY(),barrack1,barrack1HP,0,
+        Building barrack1B = new Building(barrack1.getLayoutX(), barrack1.getLayoutY(), barrack1, barrack1HP, 500,
                 "The Barracks allow you to train troops to attack your enemies");
 
-        Building barrack2B = new Building(barrack2.getLayoutX(),barrack2.getLayoutY(),barrack2,barrack2Hp,0,
+        Building barrack2B = new Building(barrack2.getLayoutX(), barrack2.getLayoutY(), barrack2, barrack2Hp, 500,
                 "The Barracks allow you to train troops to attack your enemies");
 
         map.addBuilding(townhallB);
-        map.addBuilding(archerTowerB);
-        map.addBuilding(cannonB);
         map.addBuilding(exirStorageB);
         map.addBuilding(goldStorageB);
         map.addBuilding(mineB);

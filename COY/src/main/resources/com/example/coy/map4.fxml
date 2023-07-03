@@ -103,23 +103,23 @@
             <Image url="@../../../pics/barbar.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="archerICon" fitHeight="150.0" fitWidth="200.0" layoutX="473.0" layoutY="697.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="archerICon" fitHeight="150.0" fitWidth="200.0" layoutX="473.0" layoutY="697.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../../pics/icons/Archer.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="goblinIcon" fitHeight="150.0" fitWidth="200.0" layoutX="660.0" layoutY="697.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="goblinIcon" fitHeight="150.0" fitWidth="200.0" layoutX="660.0" layoutY="697.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../../pics/icons/Goblin.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="nextMapButton" fitHeight="89.0" fitWidth="64.0" pickOnBounds="true" preserveRatio="true" visible="false" x="1450.0" y="20.0">
+      <ImageView fx:id="nextMapButton" fitHeight="89.0" fitWidth="64.0" onMouseClicked="#goToNextMap" pickOnBounds="true" preserveRatio="true" visible="false" x="1450.0" y="20.0">
          <image>
             <Image url="@../../../pics/icons/arrow.png" />
          </image>
       </ImageView>
       <Rectangle fx:id="troopRectangle1" arcHeight="20.0" arcWidth="20.0" fill="#5d5351" height="268.0" layoutX="413.0" layoutY="242.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="710.0" />
-      <Rectangle fx:id="attackBar" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutY="670.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" width="1546.0" />
+      <Rectangle fx:id="attackBar" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutY="670.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" visible="false" width="1546.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7b8c9c" height="547.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="783.0" x="400.0" y="150.0" />
       <Rectangle fx:id="rectangle1" arcHeight="30.0" arcWidth="30.0" fill="#186376" height="42.0" layoutX="70.0" layoutY="30.0" stroke="#fffefe" strokeType="INSIDE" width="204.0" />
       <Rectangle fx:id="rectangle2" arcHeight="5.0" arcWidth="5.0" fill="#137a94" height="83.0" layoutX="20.0" layoutY="20.0" stroke="WHITE" strokeType="INSIDE" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="89.0" />
@@ -148,12 +148,12 @@
             <Font size="24.0" />
          </font>
       </Label>
-      <ImageView fx:id="startAttackButton" fitHeight="70.0" fitWidth="177.0" layoutX="1321.0" layoutY="697.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="startAttackButton" fitHeight="70.0" fitWidth="177.0" layoutX="1321.0" layoutY="697.0" onMouseClicked="#startAttack" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../../pics/icons/attack.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="cancelAttackButton" fitHeight="70.0" fitWidth="163.0" layoutX="1321.0" layoutY="772.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="cancelAttackButton" fitHeight="70.0" fitWidth="163.0" layoutX="1321.0" layoutY="772.0" onMouseClicked="#endBattle" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../../pics/icons/exit.png" />
          </image>
@@ -245,16 +245,47 @@
          </image>
       </ImageView>
       <Rectangle fx:id="giantSelected" arcHeight="20.0" arcWidth="20.0" fill="#0f86a6" height="173.0" layoutX="264.0" layoutY="681.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="170.0" />
-      <ImageView fx:id="giantIcon" fitHeight="150.0" fitWidth="200.0" layoutX="274.0" layoutY="695.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="giantIcon" fitHeight="150.0" fitWidth="200.0" layoutX="274.0" layoutY="695.0" onMouseClicked="#selectGiant" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../../pics/icons/Giant.png" />
          </image>
       </ImageView>
       <Rectangle fx:id="barbarSelected" arcHeight="20.0" arcWidth="20.0" fill="#0f86a6" height="173.0" layoutX="60.0" layoutY="681.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="170.0" />
-      <ImageView fx:id="barbarIcon" fitHeight="150.0" fitWidth="200.0" layoutX="70.0" layoutY="695.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="barbarIcon" fitHeight="150.0" fitWidth="200.0" layoutX="70.0" layoutY="695.0" onMouseClicked="#selectBarBar" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@../../../pics/icons/Barbarian.png" />
          </image>
       </ImageView>
+      <Label fx:id="timeLabel" alignment="CENTER" layoutX="710.0" layoutY="13.0" prefHeight="70.0" prefWidth="138.0" text="time" textFill="WHITE" visible="false">
+         <font>
+            <Font name="System Bold" size="48.0" />
+         </font>
+      </Label>
+      <Rectangle fx:id="resultPanel" arcHeight="5.0" arcWidth="5.0" height="488.0" layoutX="458.0" layoutY="149.0" opacity="0.8" stroke="BLACK" strokeType="INSIDE" visible="false" width="649.0" />
+      <ImageView fx:id="star2" fitHeight="164.0" fitWidth="163.0" layoutX="710.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/star.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="star3" fitHeight="164.0" fitWidth="163.0" layoutX="837.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/star.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="star1" fitHeight="164.0" fitWidth="163.0" layoutX="579.0" layoutY="201.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/star.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="returnHomeButton" fitHeight="70.0" fitWidth="170.0" layoutX="713.0" layoutY="499.0" onMouseClicked="#goToHomeMap" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/return.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="percentage" alignment="CENTER" layoutX="744.0" layoutY="393.0" prefHeight="55.0" prefWidth="96.0" text="100%" textFill="WHITE" visible="false">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>
