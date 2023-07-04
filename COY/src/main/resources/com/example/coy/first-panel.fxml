@@ -15,12 +15,12 @@
       </ImageView>
       <ImageView fitHeight="55.0" fitWidth="138.0" layoutX="627.0" layoutY="339.0" onMouseClicked="#signUp" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../pics/Layer%205.png" />
+            <Image url="@../../../pics/icons/Layer%205.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="55.0" fitWidth="138.0" layoutX="762.0" layoutY="339.0" onMouseClicked="#signIn" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../pics/Layer%205.png" />
+            <Image url="@../../../pics/icons/Layer%205.png" />
          </image>
       </ImageView>
       <Label fx:id="text1" alignment="CENTER" layoutX="640.0" layoutY="350.0" prefHeight="30.0" prefWidth="81.0" style="-fx-font-family: Supercell-magic;" text="Sign Up" textFill="WHITE">

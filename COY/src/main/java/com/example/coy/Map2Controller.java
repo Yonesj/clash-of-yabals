@@ -32,6 +32,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Map2Controller extends MapController implements Initializable {
+    public static Player defenderPlayer;
+    public static Player attackerPlayer;
+    public static boolean attackMode;
     private ExecutorService executorService = Executors.newCachedThreadPool();
 
     private Map currentMap;
@@ -311,9 +314,19 @@ public class Map2Controller extends MapController implements Initializable {
             Statement statement2 = connection.prepareStatement(command2);
             ResultSet result = statement2.executeQuery(command2);
 
-            result.next();
-            target = new Player(result.getInt("userID"), result.getString("username"), result.getString("password"),
-                    result.getInt("level"), result.getString("map"));
+//            result.next();
+//            target = new Player(result.getInt("userID"), result.getString("username"), result.getString("password"),
+//                    result.getInt("level"), result.getString("map"));
+            while (result.next()) {
+                int userid = result.getInt("userID");
+                String username = result.getString("username");
+                String password =result.getString("password") ;
+                int level = result.getInt("level");
+                int wins = result.getInt("winCount");;
+                int losses = result.getInt("losses");;
+                String map = result.getString("map");
+                target = new Player(userid,username,password,level,wins,losses,map);
+            }
 
             connection.close();
         } catch (Exception e) {
@@ -324,22 +337,22 @@ public class Map2Controller extends MapController implements Initializable {
         switch (target.getMap()) {
             case "map1":
                 Map1Controller.defenderPlayer = target;
-                Map1Controller.attackerPlayer = this.defenderPlayer;
+                Map1Controller.attackerPlayer = defenderPlayer;
                 Map1Controller.attackMode = true;
                 break;
             case "map2":
                 Map2Controller.defenderPlayer = target;
-                Map2Controller.attackerPlayer = this.defenderPlayer;
+                Map2Controller.attackerPlayer = defenderPlayer;
                 Map2Controller.attackMode = true;
                 break;
             case "map3":
                 Map3Controller.defenderPlayer = target;
-                Map3Controller.attackerPlayer = this.defenderPlayer;
+                Map3Controller.attackerPlayer = defenderPlayer;
                 Map3Controller.attackMode = true;
                 break;
             case "map4":
                 Map4Controller.defenderPlayer = target;
-                Map4Controller.attackerPlayer = this.defenderPlayer;
+                Map4Controller.attackerPlayer = defenderPlayer;
                 Map4Controller.attackMode = true;
         }
 
@@ -440,7 +453,7 @@ public class Map2Controller extends MapController implements Initializable {
         resultPanel.setVisible(true);
         returnHomeButton.setVisible(true);
 
-        int percent = (int) (((9.0 - currentMap.getBuildings().size()) / 9.0) * 100);
+        int percent = (int) (((13.0 - currentMap.getBuildings().size()) / 13.0) * 100);
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -451,11 +464,15 @@ public class Map2Controller extends MapController implements Initializable {
 
 
         int starCount = 0;
+        boolean TownHallIsUP = false;
         for (Building building: currentMap.getBuildings()){
             if(building == townhallB){
-                starCount++;
+                TownHallIsUP = true;
                 break;
             }
+        }
+        if(!TownHallIsUP){
+            starCount++;
         }
         if(percent > 50){
             starCount++;
@@ -845,7 +862,7 @@ public class Map2Controller extends MapController implements Initializable {
                     hero.setFitWidth(40);
                     hero.setFitHeight(50);
 
-                    troop = new Troop(x, y, hero, heroHp, currentMap.getBuildings(), 300, 200, 200, 50, FavoriteTarget.RESOURCE, "jews");
+                    troop = new Troop(x, y, hero, heroHp, currentMap.getBuildings(), 300, 200, 200, 0, FavoriteTarget.RESOURCE, "jews");
                     goblinCount--;
                 }
 

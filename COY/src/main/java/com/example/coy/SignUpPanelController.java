@@ -60,6 +60,7 @@ public class SignUpPanelController implements Initializable {
             resultTable = statement.executeQuery(command);
 
             String user = null;
+            int userCount = 0;
 
             while (resultTable.next()) {
                 user = resultTable.getString("username");
@@ -69,9 +70,10 @@ public class SignUpPanelController implements Initializable {
                     alert.show();
                     return false;
                 }
+                userCount++;
             }
 
-            player = new Player(0,username,password, 1,"map4");
+            player = new Player(++userCount,username,password, 1,0,0,"map4");
 
             String command2 = String.format("INSERT INTO `data` (`userID`, `username`, `password`, `level`, `winCount`, `losses`, `map`) VALUES ('%d', '%s', '%s', '1', '0', '0', 'map4')",player.getId(),username,password);
             Statement statement2 = connection.prepareStatement(command2);

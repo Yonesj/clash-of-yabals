@@ -7,11 +7,17 @@ import javafx.scene.Cursor;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
+import model.Player;
 
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class Map1Controller implements Initializable {
+    public static Player defenderPlayer;
+    public static Player attackerPlayer;
+    public static boolean attackMode;
+    private Random rand = new Random();
 
     @FXML
     private ImageView archer1;

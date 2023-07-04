@@ -57,11 +57,12 @@ public class Timer implements Runnable{
         if(map4Controller != null) {
             map4Controller.showResultPanel();
         }else if(map3Controller != null) {
-//            map3Controller.showResultPanel();
+            map3Controller.showResultPanel();
         }else if(map2Controller != null) {
-//            map2Controller.showResultPanel();
-        }else if(map1Controller != null) {
-//            map1Controller.showResultPanel();
+            map2Controller.showResultPanel();
         }
+//        else if(map1Controller != null) {
+//            map1Controller.showResultPanel();
+//        }
     }
 }

@@ -110,7 +110,7 @@
             <Image url="@../../../pics/barbar.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="nextMapButton" fitHeight="89.0" fitWidth="64.0" layoutX="20.0" layoutY="20.0" onMouseClicked="#goToNextMap" pickOnBounds="true" preserveRatio="true" visible="false" x="1450.0" y="20.0">
+      <ImageView fx:id="nextMapButton" fitHeight="89.0" fitWidth="64.0" layoutX="20.0" layoutY="20.0" onMouseClicked="#goToNextMap" pickOnBounds="true" preserveRatio="true" x="1430.0" y="10.0">
          <image>
             <Image url="@../../../pics/icons/arrow.png" />
          </image>

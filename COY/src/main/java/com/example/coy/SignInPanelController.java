@@ -67,7 +67,7 @@ public class SignInPanelController implements Initializable {
                     pass = resultTable.getString("password");
                     if(pass.equals(password)){
                         player = new Player(resultTable.getInt("userID"),resultTable.getString("username"),resultTable.getString("password"),
-                                resultTable.getInt("level"),resultTable.getString("map"));
+                                resultTable.getInt("level"),resultTable.getInt("winCount"),resultTable.getInt("losses"),resultTable.getString("map"));
 
                         return true;
                     }else {
@@ -121,7 +121,7 @@ public class SignInPanelController implements Initializable {
                             break;
                         case "map4":
                             Map4Controller.defenderPlayer = player;
-                            Map4Controller.attackMode = true;
+                            Map4Controller.attackMode = false;
                     }
 
                     Parent root1 = null;

@@ -36,6 +36,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Map4Controller extends MapController implements Initializable {
+    public static Player defenderPlayer;
+    public static Player attackerPlayer;
+    public static boolean attackMode;
+
     private ExecutorService executorService = Executors.newCachedThreadPool();
 
     private Map currentMap;
@@ -267,9 +271,17 @@ public class Map4Controller extends MapController implements Initializable {
             Statement statement2 = connection.prepareStatement(command2);
             ResultSet result = statement2.executeQuery(command2);
 
-            result.next();
-            target = new Player(result.getInt("userID"), result.getString("username"), result.getString("password"),
-                    result.getInt("level"), result.getString("map"));
+//            result.next();
+            while (result.next()) {
+                int userid = result.getInt("userID");
+                String username = result.getString("username");
+                String password =result.getString("password") ;
+                int level = result.getInt("level");
+                int wins = result.getInt("winCount");;
+                int losses = result.getInt("losses");;
+                String map = result.getString("map");
+                target = new Player(userid,username,password,level,wins,losses,map);
+            }
 
             connection.close();
         } catch (Exception e) {
@@ -384,11 +396,15 @@ public class Map4Controller extends MapController implements Initializable {
 
 
         int starCount = 0;
+        boolean TownHallIsUP = false;
         for (Building building: currentMap.getBuildings()){
             if(building == townhallB){
-                starCount++;
+                TownHallIsUP = true;
                 break;
             }
+        }
+        if(!TownHallIsUP){
+            starCount++;
         }
         if(percent > 50){
             starCount++;
@@ -400,10 +416,13 @@ public class Map4Controller extends MapController implements Initializable {
         switch (starCount){
             case 1:
                 star1.setVisible(true);
+                star2.setVisible(false);
+                star3.setVisible(false);
                 break;
             case 2:
                 star1.setVisible(true);
                 star2.setVisible(true);
+                star3.setVisible(false);
                 break;
             case 3:
                 star1.setVisible(true);

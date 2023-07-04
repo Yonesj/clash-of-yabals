@@ -10,12 +10,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -27,15 +25,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Random;
+
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Map3Controller extends MapController implements Initializable{
+    public static Player defenderPlayer;
+    public static Player attackerPlayer;
+    public static boolean attackMode;
     private ExecutorService executorService = Executors.newCachedThreadPool();
 
     private Map currentMap;
@@ -286,9 +285,19 @@ public class Map3Controller extends MapController implements Initializable{
             Statement statement2 = connection.prepareStatement(command2);
             ResultSet result = statement2.executeQuery(command2);
 
-            result.next();
-            target = new Player(result.getInt("userID"), result.getString("username"), result.getString("password"),
-                    result.getInt("level"), result.getString("map"));
+//            result.next();
+//            target = new Player(result.getInt("userID"), result.getString("username"), result.getString("password"),
+//                    result.getInt("level"), result.getString("map"));
+            while (result.next()) {
+                int userid = result.getInt("userID");
+                String username = result.getString("username");
+                String password =result.getString("password") ;
+                int level = result.getInt("level");
+                int wins = result.getInt("winCount");;
+                int losses = result.getInt("losses");;
+                String map = result.getString("map");
+                target = new Player(userid,username,password,level,wins,losses,map);
+            }
 
             connection.close();
         } catch (Exception e) {
@@ -299,22 +308,22 @@ public class Map3Controller extends MapController implements Initializable{
         switch (target.getMap()) {
             case "map1":
                 Map1Controller.defenderPlayer = target;
-                Map1Controller.attackerPlayer = this.defenderPlayer;
+                Map1Controller.attackerPlayer = defenderPlayer;
                 Map1Controller.attackMode = true;
                 break;
             case "map2":
                 Map2Controller.defenderPlayer = target;
-                Map2Controller.attackerPlayer = this.defenderPlayer;
+                Map2Controller.attackerPlayer = defenderPlayer;
                 Map2Controller.attackMode = true;
                 break;
             case "map3":
                 Map3Controller.defenderPlayer = target;
-                Map3Controller.attackerPlayer = this.defenderPlayer;
+                Map3Controller.attackerPlayer = defenderPlayer;
                 Map3Controller.attackMode = true;
                 break;
             case "map4":
                 Map4Controller.defenderPlayer = target;
-                Map4Controller.attackerPlayer = this.defenderPlayer;
+                Map4Controller.attackerPlayer = defenderPlayer;
                 Map4Controller.attackMode = true;
         }
 
@@ -407,11 +416,15 @@ public class Map3Controller extends MapController implements Initializable{
 
 
         int starCount = 0;
+        boolean TownHallIsUP = false;
         for (Building building: currentMap.getBuildings()){
             if(building == townhallB){
-                starCount++;
+                TownHallIsUP = true;
                 break;
             }
+        }
+        if(!TownHallIsUP){
+            starCount++;
         }
         if(percent > 50){
             starCount++;
@@ -423,10 +436,13 @@ public class Map3Controller extends MapController implements Initializable{
         switch (starCount){
             case 1:
                 star1.setVisible(true);
+                star2.setVisible(false);
+                star3.setVisible(false);
                 break;
             case 2:
                 star1.setVisible(true);
                 star2.setVisible(true);
+                star3.setVisible(false);
                 break;
             case 3:
                 star1.setVisible(true);

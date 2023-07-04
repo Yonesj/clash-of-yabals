@@ -10,18 +10,14 @@ public class Player {
     private int wins;
     private String map;
 
-    public Player(int id,String username, String password, int level, String map) {
-        if(id == 0){
-            this.id = playerCounter++;
-        }else {
-            this.id = id;
-        }
+    public Player(int id, String username, String password, int level, int wins, int losses, String map) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.level = level;
         this.map = map;
-        this.wins = 0;
-        this.losses = 0;
+        this.wins = wins;
+        this.losses = losses;
     }
 
     public int getId() {
