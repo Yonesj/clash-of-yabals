@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane prefHeight="1155.0" prefWidth="1546.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.coy.Map3Controller">
+   <children>
+      <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" pannable="true" prefHeight="1155.0" prefWidth="1546.0" vbarPolicy="NEVER" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <content>
+            <AnchorPane fx:id="anchorPane" prefHeight="1155.0" prefWidth="1546.0">
+               <children>
+                  <ImageView fx:id="map" fitHeight="1190.0" fitWidth="1546.0" layoutX="-5.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <image>
+                        <Image url="@../../../pics/map1.jpg" />
+                     </image>
+                  </ImageView>
+                  <Circle fx:id="archerRange" fill="WHITE" layoutX="697.0" layoutY="584.0" opacity="0.18" radius="157.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+                  <Circle fx:id="cannonRange" fill="WHITE" layoutX="917.0" layoutY="571.0" opacity="0.18" radius="141.0" stroke="BLACK" strokeType="INSIDE" visible="false" />
+                  <ImageView fx:id="clanCastle" fitHeight="98.0" fitWidth="84.0" layoutX="752.0" layoutY="637.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/3/Clan_Castle1.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="barrack1" fitHeight="97.0" fitWidth="96.0" layoutX="640.0" layoutY="449.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/3/barrack_6.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="cannon" fitHeight="108.0" fitWidth="82.0" layoutX="865.0" layoutY="543.0" onMouseClicked="#makeCannonRangeVisible" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/3/cannon_8.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="exirStorage" fitHeight="72.0" fitWidth="69.0" layoutX="872.0" layoutY="637.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/3/elixir_storage_9.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="exircollector" fitHeight="84.0" fitWidth="80.0" layoutX="854.0" layoutY="450.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/3/elixir_collector_5.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="goldStorage" fitHeight="119.0" fitWidth="84.0" layoutX="752.0" layoutY="448.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/3/gold_storage_11.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="townhall" fitHeight="105.0" fitWidth="96.0" layoutX="746.0" layoutY="525.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/3/6.png" />
+                     </image>
+                  </ImageView>
+                  <ImageView fx:id="archerTower" fitHeight="93.0" fitWidth="74.0" layoutX="650.0" layoutY="540.0" onMouseClicked="#makeArcherRangeVisible" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/3/Archer_Tower6B.png" />
+                     </image>
+                  </ImageView>
+                  <ProgressBar fx:id="archerHP" layoutX="661.0" layoutY="535.0" prefHeight="14.0" prefWidth="51.0" progress="1.0" visible="false" />
+                  <ProgressBar fx:id="clanCastleHP" layoutX="768.0" layoutY="633.0" prefHeight="14.0" prefWidth="51.0" progress="1.0" visible="false" />
+                  <ProgressBar fx:id="barrack1HP" layoutX="661.0" layoutY="449.0" prefHeight="14.0" prefWidth="51.0" progress="1.0" visible="false" />
+                  <ProgressBar fx:id="exirStorageHP" layoutX="880.0" layoutY="634.0" prefHeight="14.0" prefWidth="51.0" progress="1.0" visible="false" />
+                  <ProgressBar fx:id="cannonHp" layoutX="881.0" layoutY="542.0" prefHeight="14.0" prefWidth="51.0" progress="1.0" visible="false" />
+                  <ProgressBar fx:id="exircollectorHp" layoutX="868.0" layoutY="449.0" prefHeight="14.0" prefWidth="51.0" progress="1.0" visible="false" />
+                  <ProgressBar fx:id="goldStorageHP" layoutX="768.0" layoutY="449.0" prefHeight="14.0" prefWidth="51.0" progress="1.0" visible="false" />
+                  <ProgressBar fx:id="townhallHP" layoutX="768.0" layoutY="525.0" prefHeight="14.0" prefWidth="51.0" progress="1.0" visible="false" />
+                  <ImageView fx:id="lab" fitHeight="89.0" fitWidth="87.0" layoutX="644.0" layoutY="628.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../pics/3/laboratory_2.png" />
+                     </image>
+                  </ImageView>
+                  <ProgressBar fx:id="labHP" layoutX="661.0" layoutY="627.0" prefHeight="14.0" prefWidth="51.0" progress="1.0" visible="false" />
+               </children>
+            </AnchorPane>
+         </content>
+      </ScrollPane>
+      <ImageView fx:id="barbarPanel" fitHeight="488.0" fitWidth="650.0" layoutX="470.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/barbar.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="goblinIcon" fitHeight="150.0" fitWidth="200.0" layoutX="670.0" layoutY="707.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/Goblin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="nextMapButton" fitHeight="89.0" fitWidth="64.0" layoutX="10.0" layoutY="10.0" onMouseClicked="#goToNextMap" pickOnBounds="true" preserveRatio="true" visible="false" x="1450.0" y="20.0">
+         <image>
+            <Image url="@../../../pics/icons/arrow.png" />
+         </image>
+      </ImageView>
+      <Rectangle fx:id="troopRectangle1" arcHeight="20.0" arcWidth="20.0" fill="#5d5351" height="268.0" layoutX="423.0" layoutY="252.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="710.0" />
+      <Rectangle fx:id="attackBar" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutY="680.0" opacity="0.5" stroke="BLACK" strokeType="INSIDE" visible="false" width="1556.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7b8c9c" height="547.0" layoutX="10.0" layoutY="10.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="783.0" x="400.0" y="150.0" />
+      <Rectangle fx:id="archerSelected" arcHeight="20.0" arcWidth="20.0" fill="#0f86a6" height="173.0" layoutX="473.0" layoutY="691.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="170.0" />
+      <ImageView fx:id="archerICon" fitHeight="150.0" fitWidth="200.0" layoutX="483.0" layoutY="707.0" onMouseClicked="#selectArcher" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/Archer.png" />
+         </image>
+      </ImageView>
+      <Rectangle fx:id="rectangle1" arcHeight="30.0" arcWidth="30.0" fill="#186376" height="42.0" layoutX="80.0" layoutY="40.0" stroke="#fffefe" strokeType="INSIDE" width="204.0" />
+      <Rectangle fx:id="rectangle2" arcHeight="5.0" arcWidth="5.0" fill="#137a94" height="83.0" layoutX="30.0" layoutY="30.0" stroke="WHITE" strokeType="INSIDE" style="-fx-arc-height: 30; -fx-arc-width: 30;" width="89.0" />
+      <ImageView fx:id="troopButton" fitHeight="89.0" fitWidth="89.0" layoutX="27.0" layoutY="215.0" onMouseClicked="#troopsInfo" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../pics/icons/Layer%203.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="star" fitHeight="92.0" fitWidth="89.0" layoutX="30.0" layoutY="27.0" onMouseClicked="#showUserInfo" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../pics/icons/star-g5806afa8d_1280.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="attackButton" fitHeight="100.0" fitWidth="89.0" layoutX="27.0" layoutY="120.0" onMouseClicked="#attack" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../../pics/icons/0.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="levelLabel" alignment="CENTER" layoutX="61.0" layoutY="44.0" prefHeight="51.0" prefWidth="26.0" text="1" textFill="WHITE">
+         <font>
+            <Font size="38.0" />
+         </font>
+      </Label>
+      <Label fx:id="usernameField" layoutX="130.0" layoutY="43.0" prefHeight="35.0" prefWidth="130.0" text="username" textFill="WHITE">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="startAttackButton" fitHeight="70.0" fitWidth="177.0" layoutX="1331.0" layoutY="707.0" onMouseClicked="#startAttack" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/attack.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="cancelAttackButton" fitHeight="70.0" fitWidth="163.0" layoutX="1331.0" layoutY="782.0" onMouseClicked="#endBattle" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/exit.png" />
+         </image>
+      </ImageView>
+      <Rectangle fx:id="troopRectangle2" arcHeight="20.0" arcWidth="20.0" fill="#e7e8e0" height="200.0" layoutX="434.0" layoutY="309.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="689.0" />
+      <Label fx:id="troopsLabel" alignment="CENTER" layoutX="731.0" layoutY="259.0" prefHeight="40.0" prefWidth="104.0" text="Troops" textFill="WHITE" visible="false">
+         <font>
+            <Font name="System Bold" size="28.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="exitButton" fitHeight="42.0" fitWidth="40.0" layoutX="1083.0" layoutY="260.0" onMouseClicked="#exitInfoPanel" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/x.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="archerICon1" fitHeight="150.0" fitWidth="200.0" layoutX="792.0" layoutY="331.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/Archer.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="giantIcon1" fitHeight="150.0" fitWidth="200.0" layoutX="622.0" layoutY="331.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/Giant.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="barbarIcon1" fitHeight="150.0" fitWidth="200.0" layoutX="452.0" layoutY="331.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/Barbarian.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="goblinIcon1" fitHeight="150.0" fitWidth="200.0" layoutX="953.0" layoutY="331.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/Goblin.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="barbarInfo" fitHeight="42.0" fitWidth="47.0" layoutX="558.0" layoutY="439.0" onMouseClicked="#showBarbarInfo" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/info.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="goblinInfo" fitHeight="42.0" fitWidth="47.0" layoutX="1062.0" layoutY="439.0" onMouseClicked="#showGoblinInfo" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/info.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="archerInfo" fitHeight="42.0" fitWidth="47.0" layoutX="900.0" layoutY="439.0" onMouseClicked="#showArcherInfo" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/info.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="giantInfo" fitHeight="42.0" fitWidth="47.0" layoutX="731.0" layoutY="439.0" onMouseClicked="#showGiantInfo" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/info.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="barbarExit" fitHeight="42.0" fitWidth="48.0" layoutX="1070.0" layoutY="160.0" onMouseClicked="#exitBarbarPanel" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/x.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="giantPanel" fitHeight="488.0" fitWidth="658.0" layoutX="468.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/giantinfo.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="giantExit" fitHeight="42.0" fitWidth="48.0" layoutX="1070.0" layoutY="160.0" onMouseClicked="#exitGiantPanel" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/x.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="archerPanel" fitHeight="488.0" fitWidth="649.0" layoutX="468.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/archerinfo.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="archerExit" fitHeight="42.0" fitWidth="48.0" layoutX="1070.0" layoutY="160.0" onMouseClicked="#exitArcherPanel" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/x.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="goblinPanel" fitHeight="488.0" fitWidth="744.0" layoutX="468.0" layoutY="160.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/goblinInfo.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="goblinExit" fitHeight="42.0" fitWidth="48.0" layoutX="1070.0" layoutY="160.0" onMouseClicked="#exitGoblinPanel" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/x.png" />
+         </image>
+      </ImageView>
+      <Rectangle fx:id="giantSelected" arcHeight="20.0" arcWidth="20.0" fill="#0f86a6" height="173.0" layoutX="274.0" layoutY="691.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="170.0" />
+      <ImageView fx:id="giantIcon" fitHeight="150.0" fitWidth="200.0" layoutX="284.0" layoutY="705.0" onMouseClicked="#selectGiant" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/Giant.png" />
+         </image>
+      </ImageView>
+      <Rectangle fx:id="barbarSelected" arcHeight="20.0" arcWidth="20.0" fill="#0f86a6" height="173.0" layoutX="70.0" layoutY="691.0" stroke="BLACK" strokeType="INSIDE" visible="false" width="170.0" />
+      <ImageView fx:id="barbarIcon" fitHeight="150.0" fitWidth="200.0" layoutX="80.0" layoutY="705.0" onMouseClicked="#selectBarBar" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/Barbarian.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="timeLabel" alignment="CENTER" layoutX="720.0" layoutY="23.0" prefHeight="70.0" prefWidth="138.0" text="time" textFill="WHITE" visible="false">
+         <font>
+            <Font name="System Bold" size="48.0" />
+         </font>
+      </Label>
+      <Rectangle fx:id="resultPanel" arcHeight="5.0" arcWidth="5.0" height="488.0" layoutX="468.0" layoutY="159.0" opacity="0.8" stroke="BLACK" strokeType="INSIDE" visible="false" width="649.0" />
+      <ImageView fx:id="star2" fitHeight="164.0" fitWidth="163.0" layoutX="720.0" layoutY="178.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/star.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="star3" fitHeight="164.0" fitWidth="163.0" layoutX="847.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/star.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="star1" fitHeight="164.0" fitWidth="163.0" layoutX="589.0" layoutY="211.0" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/star.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="returnHomeButton" fitHeight="70.0" fitWidth="170.0" layoutX="723.0" layoutY="509.0" onMouseClicked="#goToHomeMap" pickOnBounds="true" preserveRatio="true" visible="false">
+         <image>
+            <Image url="@../../../pics/icons/return.png" />
+         </image>
+      </ImageView>
+      <Label fx:id="percentage" alignment="CENTER" layoutX="754.0" layoutY="403.0" prefHeight="55.0" prefWidth="96.0" text="100%" textFill="WHITE" visible="false">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

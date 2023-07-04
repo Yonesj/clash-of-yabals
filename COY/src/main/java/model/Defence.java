@@ -2,6 +2,7 @@ package model;
 
 import com.example.coy.Map2Controller;
 import com.example.coy.Map4Controller;
+import com.example.coy.MapController;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
@@ -21,11 +22,13 @@ public class Defence extends Building implements Runnable {
     ListIterator<Troop> iterator = targets.listIterator();
     private Troop target;
     private double distance = 0;
+    private MapController mapController;
 
-    public Defence(double x, double y, ImageView image, ProgressBar hpBar, int HP, String info, int damage, Circle range) {
+    public Defence(double x, double y, ImageView image, ProgressBar hpBar, int HP, String info, int damage, Circle range,MapController mapController) {
         super(x, y, image, hpBar, HP, info);
         this.damage = damage;
         this.range = range;
+        this.mapController = mapController;
     }
 
     public Defence(int HP, String info, int damage) {
@@ -62,8 +65,8 @@ public class Defence extends Building implements Runnable {
     }
 
     private void detectTarget() {
-        synchronized (Map4Controller.troops) {
-            targets = Map4Controller.troops;
+        synchronized (mapController.troops) {
+            targets = mapController.troops;
         }
 
         synchronized (targets) {
@@ -96,7 +99,7 @@ public class Defence extends Building implements Runnable {
                 target.getImage().setVisible(false);
                 target.getHpBar().setVisible(false);
                 targets.remove(target);
-                Map4Controller.troops.remove(target);
+                mapController.troops.remove(target);
                 target = null;
             } else {
                 getImage().setVisible(false);

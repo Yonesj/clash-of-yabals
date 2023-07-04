@@ -35,12 +35,11 @@ import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Map4Controller extends MapController implements Initializable {
+public class Map3Controller extends MapController implements Initializable{
     private ExecutorService executorService = Executors.newCachedThreadPool();
 
     private Map currentMap;
     private Building townhallB;
-
 
     //sql constance
     private final String url = "jdbc:mysql://localhost/usersData";
@@ -50,20 +49,65 @@ public class Map4Controller extends MapController implements Initializable {
     //attack
     private boolean isBarbarSelected = false;
     private boolean isGiantSelected = false;
+    private boolean isArcherSelected = false;
     private boolean isAttackStarted;
     private int giantCount = 6;
     private int barbarCount = 12;
+    private int archerCount = 5;
+
     @FXML
     private AnchorPane anchorPane;
+
+    @FXML
+    private ImageView archerExit;
 
     @FXML
     private ProgressBar archerHP;
 
     @FXML
+    private ImageView archerICon;
+
+    @FXML
+    private ImageView archerICon1;
+
+    @FXML
+    private ImageView archerInfo;
+
+    @FXML
+    private ImageView archerPanel;
+
+    @FXML
     private Circle archerRange;
 
     @FXML
+    private Rectangle archerSelected;
+
+    @FXML
     private ImageView archerTower;
+
+    @FXML
+    private Rectangle attackBar;
+
+    @FXML
+    private ImageView attackButton;
+
+    @FXML
+    private ImageView barbarExit;
+
+    @FXML
+    private ImageView barbarIcon;
+
+    @FXML
+    private ImageView barbarIcon1;
+
+    @FXML
+    private ImageView barbarInfo;
+
+    @FXML
+    private ImageView barbarPanel;
+
+    @FXML
+    private Rectangle barbarSelected;
 
     @FXML
     private ImageView barrack1;
@@ -72,22 +116,7 @@ public class Map4Controller extends MapController implements Initializable {
     private ProgressBar barrack1HP;
 
     @FXML
-    private ImageView barrack2;
-
-    @FXML
-    private ProgressBar barrack2Hp;
-
-    @FXML
-    private ImageView camp1;
-
-    @FXML
-    private ProgressBar camp1HP;
-
-    @FXML
-    private ImageView camp2;
-
-    @FXML
-    private ProgressBar camp2HP;
+    private ImageView cancelAttackButton;
 
     @FXML
     private ImageView cannon;
@@ -97,6 +126,12 @@ public class Map4Controller extends MapController implements Initializable {
 
     @FXML
     private Circle cannonRange;
+
+    @FXML
+    private ImageView clanCastle;
+
+    @FXML
+    private ProgressBar clanCastleHP;
 
     @FXML
     private ImageView exirStorage;
@@ -111,22 +146,97 @@ public class Map4Controller extends MapController implements Initializable {
     private ProgressBar exircollectorHp;
 
     @FXML
+    private ImageView exitButton;
+
+    @FXML
+    private ImageView giantExit;
+
+    @FXML
+    private ImageView giantIcon;
+
+    @FXML
+    private ImageView giantIcon1;
+
+    @FXML
+    private ImageView giantInfo;
+
+    @FXML
+    private ImageView giantPanel;
+
+    @FXML
+    private Rectangle giantSelected;
+
+    @FXML
+    private ImageView goblinExit;
+
+    @FXML
+    private ImageView goblinIcon;
+
+    @FXML
+    private ImageView goblinIcon1;
+
+    @FXML
+    private ImageView goblinInfo;
+
+    @FXML
+    private ImageView goblinPanel;
+
+    @FXML
     private ImageView goldStorage;
 
     @FXML
     private ProgressBar goldStorageHP;
 
     @FXML
+    private ImageView lab;
+
+    @FXML
+    private ProgressBar labHP;
+
+    @FXML
+    private Label levelLabel;
+
+    @FXML
     private ImageView map;
 
     @FXML
-    private ImageView mine;
+    private ImageView nextMapButton;
 
     @FXML
-    private ProgressBar mineHP;
+    private Label percentage;
+
+    @FXML
+    private Rectangle rectangle1;
+
+    @FXML
+    private Rectangle rectangle2;
+
+    @FXML
+    private Rectangle resultPanel;
+
+    @FXML
+    private ImageView returnHomeButton;
 
     @FXML
     private ScrollPane scrollPane;
+
+    @FXML
+    private ImageView star;
+
+    @FXML
+    private ImageView star1;
+
+    @FXML
+    private ImageView star2;
+
+    @FXML
+    private ImageView star3;
+
+    @FXML
+    private ImageView startAttackButton;
+
+    @FXML
+    private Label timeLabel;
 
     @FXML
     private ImageView townhall;
@@ -134,111 +244,20 @@ public class Map4Controller extends MapController implements Initializable {
     @FXML
     private ProgressBar townhallHP;
 
-
-    //home variables
-    @FXML
-    private Label usernameField;
-    @FXML
-    private ImageView star;
-
-    @FXML
-    private Rectangle rectangle1;
-
-    @FXML
-    private Rectangle rectangle2;
-    @FXML
-    private Label levelLabel;
-
-    @FXML
-    private ImageView attackButton;
-
     @FXML
     private ImageView troopButton;
 
-
-    //attack variables
-    @FXML
-    private Rectangle attackBar;
-    @FXML
-    private ImageView barbarIcon;
-    @FXML
-    private ImageView archerICon;
-    @FXML
-    private ImageView giantIcon;
-    @FXML
-    private ImageView goblinIcon;
-    @FXML
-    private ImageView startAttackButton;
-    @FXML
-    private ImageView cancelAttackButton;
-    @FXML
-    private ImageView nextMapButton;
-    @FXML
-    private Rectangle barbarSelected;
-    @FXML
-    private Rectangle giantSelected;
-    @FXML
-    private Label timeLabel;
-
-    //
-    @FXML
-    private Rectangle resultPanel;
-    @FXML
-    private ImageView star1;
-    @FXML
-    private ImageView star2;
-    @FXML
-    private ImageView star3;
-    @FXML
-    private Label percentage;
-    @FXML
-    private ImageView returnHomeButton;
-
-
-    //troops variables
-    @FXML
-    private Label troopsLabel;
-    @FXML
-    private ImageView exitButton;
     @FXML
     private Rectangle troopRectangle1;
+
     @FXML
     private Rectangle troopRectangle2;
-    @FXML
-    private ImageView goblinIcon1;
-    @FXML
-    private ImageView goblinInfo;
-    @FXML
-    private ImageView archerICon1;
-    @FXML
-    private ImageView archerInfo;
-    @FXML
-    private ImageView barbarIcon1;
-    @FXML
-    private ImageView barbarInfo;
-    @FXML
-    private ImageView giantIcon1;
-    @FXML
-    private ImageView giantInfo;
-
 
     @FXML
-    private ImageView archerExit;
-    @FXML
-    private ImageView archerPanel;
-    @FXML
-    private ImageView barbarExit;
-    @FXML
-    private ImageView barbarPanel;
-    @FXML
-    private ImageView giantExit;
-    @FXML
-    private ImageView giantPanel;
-    @FXML
-    private ImageView goblinExit;
-    @FXML
-    private ImageView goblinPanel;
+    private Label troopsLabel;
 
+    @FXML
+    private Label usernameField;
 
     @FXML
     void showUserInfo(MouseEvent event) {
@@ -325,41 +344,45 @@ public class Map4Controller extends MapController implements Initializable {
     void selectBarBar(MouseEvent event) {
         isBarbarSelected = true;
         isGiantSelected = false;
+        isArcherSelected = false;
 
         barbarSelected.setVisible(true);
         giantSelected.setVisible(false);
+        archerSelected.setVisible(false);
     }
 
     @FXML
     void selectGiant(MouseEvent event) {
         isGiantSelected = true;
         isBarbarSelected = false;
+        isArcherSelected = false;
 
         barbarSelected.setVisible(false);
         giantSelected.setVisible(true);
+        archerSelected.setVisible(false);
     }
 
     @FXML
-    void startAttack(MouseEvent event) throws InterruptedException {
+    void selectArcher(){
+        isGiantSelected = false;
+        isBarbarSelected = false;
+        isArcherSelected = true;
+
+        barbarSelected.setVisible(false);
+        giantSelected.setVisible(false);
+        archerSelected.setVisible(true);
+    }
+
+    @FXML
+    void startAttack(MouseEvent event) {
         nextMapButton.setVisible(false);
         timeLabel.setVisible(true);
 
         isAttackStarted = true;
 
         Timer timer = new Timer(timeLabel);
-        timer.map4Controller = this;
+        timer.map3Controller = this;
         executorService.execute(timer);
-
-//        int leftTime = 120;
-//        while (leftTime >= 0) {
-//            timeLabel.setText(Integer.toString(leftTime) + " S");
-//            leftTime--;
-//            try {
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                System.out.println(e.getStackTrace());
-//            }
-//        }
     }
 
     @FXML
@@ -373,7 +396,7 @@ public class Map4Controller extends MapController implements Initializable {
         resultPanel.setVisible(true);
         returnHomeButton.setVisible(true);
 
-        int percent = (int) (((11.0 - currentMap.getBuildings().size()) / 11.0) * 100);
+        int percent = (int) (((9.0 - currentMap.getBuildings().size()) / 9.0) * 100);
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -467,6 +490,7 @@ public class Map4Controller extends MapController implements Initializable {
         stage1.setScene(scene1);
         stage1.show();
     }
+
     @FXML
     void troopsInfo(MouseEvent event) {
         troopsLabel.setVisible(true);
@@ -650,7 +674,6 @@ public class Map4Controller extends MapController implements Initializable {
         barbarInfo.setVisible(true);
         archerInfo.setVisible(true);
     }
-
     @FXML
     void makeArcherRangeVisible(MouseEvent event) {
         if (!attackMode) {
@@ -664,14 +687,13 @@ public class Map4Controller extends MapController implements Initializable {
             cannonRange.setVisible(!cannonRange.isVisible());
         }
     }
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         rectangle1.setVisible(true);
         rectangle2.setVisible(true);
         star.setVisible(true);
         levelLabel.setVisible(true);
+        levelLabel.setText(Integer.toString(defenderPlayer.getLevel()));
         usernameField.setText(defenderPlayer.getUsername());
         usernameField.setVisible(true);
 
@@ -724,6 +746,7 @@ public class Map4Controller extends MapController implements Initializable {
 
         Image giantImage = new Image("giant_7.png");
         Image barbarImage = new Image("barbarian_9.png");
+        Image archerImage = new Image("archer_5.png");
 
         map.setOnMouseClicked(event -> {
             if (attackMode && isAttackStarted) {
@@ -761,6 +784,13 @@ public class Map4Controller extends MapController implements Initializable {
 
                     troop = new Troop(x, y, hero, heroHp, currentMap.getBuildings(), 1300, 100, 0, 30, FavoriteTarget.DEFENCE, "These big guys may seem calm, but show them a turret or cannon and you'll see their fury unleashed! Slow yet durable, these warriors are best used to soak up hits");
                     giantCount--;
+                } else if (isArcherSelected && (archerCount != 0)) {
+                    hero.setImage(archerImage);
+                    hero.setFitWidth(40);
+                    hero.setFitHeight(50);
+
+                    troop = new Troop(x, y, hero, heroHp, currentMap.getBuildings(), 200, 200, 200, 30, FavoriteTarget.ANY, "archer");
+                    archerCount--;
                 }
 
                 if (troop != null) {
@@ -777,7 +807,6 @@ public class Map4Controller extends MapController implements Initializable {
         });
     }
 
-
     private Map setUpMap() {
         Map map = Maps.map4;
 
@@ -790,33 +819,25 @@ public class Map4Controller extends MapController implements Initializable {
         Resourse goldStorageB = new Resourse(goldStorage.getLayoutX(), goldStorage.getLayoutY(), goldStorage, goldStorageHP, 700,
                 "All your precious gold is stored here. Don't let sneaky goblins anywhere near!");
 
-        Resourse mineB = new Resourse(mine.getLayoutX(), mine.getLayoutY(), mine, mineHP, 500,
-                "\"The Gold Mine produces gold. Upgrade it to boost its production and gold storage capacity.\"");
-
         Resourse exircollectorB = new Resourse(exircollector.getLayoutX(), exircollector.getLayoutY(), exircollector, exircollectorHp, 500,
                 "Elixir is pumped from the Ley Lines coursing underneath your village. Upgrade your Elixir Collectors to maximize elixir production.");
-
-        Building camp1B = new Building(camp1.getLayoutX(), camp1.getLayoutY(), camp1, camp1HP, 400,
-                "Your troops are stationed in Army Camps. Build more camps and upgrade them to muster a powerful army.");
-
-        Building camp2B = new Building(camp2.getLayoutX(), camp2.getLayoutY(), camp2, camp2HP, 400,
-                "Your troops are stationed in Army Camps. Build more camps and upgrade them to muster a powerful army.");
 
         Building barrack1B = new Building(barrack1.getLayoutX(), barrack1.getLayoutY(), barrack1, barrack1HP, 500,
                 "The Barracks allow you to train troops to attack your enemies");
 
-        Building barrack2B = new Building(barrack2.getLayoutX(), barrack2.getLayoutY(), barrack2, barrack2Hp, 500,
-                "The Barracks allow you to train troops to attack your enemies");
+        Building clanCastleB = new Building(clanCastle.getLayoutX(), clanCastle.getLayoutY(), clanCastle, clanCastleHP, 1000, "clan castle");
+
+        Building labB = new Building(lab.getLayoutX(), lab.getLayoutY(), lab, labHP, 1000, "lab");
+
 
         map.addBuilding(townhallB);
         map.addBuilding(exirStorageB);
         map.addBuilding(goldStorageB);
-        map.addBuilding(mineB);
         map.addBuilding(exircollectorB);
-        map.addBuilding(camp1B);
-        map.addBuilding(camp2B);
+        map.addBuilding(labB);
+        map.addBuilding(clanCastleB);
         map.addBuilding(barrack1B);
-        map.addBuilding(barrack2B);
+
 
         return map;
     }
